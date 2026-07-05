@@ -25,9 +25,3 @@ export async function updateStore(id, payload) {
     body: JSON.stringify(payload),
   })
 }
-
-export async function deactivateStore(id) {
-  return apiRequest(`/stores/${id}`, {
-    method: 'DELETE',
-  })
-}

@@ -1,4 +1,9 @@
 const TOKEN_KEY = 'tiendi_token'
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/$/, '')
+
+function buildApiUrl(path) {
+  return `${API_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`
+}
 
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY)
@@ -35,7 +40,7 @@ export async function apiRequest(path, options = {}) {
     headers.Authorization = `Bearer ${token}`
   }
 
-  const response = await fetch(`/api${path}`, {
+  const response = await fetch(buildApiUrl(path), {
     ...options,
     headers,
   })

@@ -254,43 +254,72 @@ export default function OrdersPage() {
       {actionMessage && <div className="alert alert-success">{actionMessage}</div>}
       {error && <div className="alert alert-error">{error}</div>}
 
-      <div className="card analytics-section">
-        <h2>Configuración de entregas</h2>
-        <p className="muted">
-          Define tus días de entrega y cuántos días antes deben entrar los pedidos para salir en esa fecha.
-        </p>
-        <div className="orders-settings-grid">
-          <div className="orders-weekday-picker">
-            {WEEKDAY_OPTIONS.map((day) => (
-              <label key={day.value} className="checkbox-row compact">
-                <input
-                  type="checkbox"
-                  checked={settings.delivery_weekdays.includes(day.value)}
-                  onChange={() => toggleWeekday(day.value)}
-                />
-                {day.label}
-              </label>
-            ))}
+      <div className="card analytics-section orders-settings-card">
+        <div className="orders-settings-header">
+          <div>
+            <p className="section-kicker">Entregas</p>
+            <h2>Configuración de entregas</h2>
+            <p className="muted">
+              Elige los días disponibles y define con cuánta anticipación deben entrar los pedidos.
+            </p>
           </div>
-          <label>
-            Anticipación mínima (días)
-            <input
-              type="number"
-              min="0"
-              max="30"
-              value={settings.lead_time_days}
-              onChange={(event) =>
-                setSettings((current) => ({
-                  ...current,
-                  lead_time_days: Number(event.target.value),
-                }))
-              }
-            />
-          </label>
+          <div className="orders-settings-summary" aria-live="polite">
+            <span>{settings.delivery_weekdays.length}</span>
+            <small>{settings.delivery_weekdays.length === 1 ? 'día activo' : 'días activos'}</small>
+          </div>
         </div>
-        <div className="form-actions">
+
+        <div className="orders-settings-grid">
+          <fieldset className="orders-weekday-fieldset">
+            <legend>Días de entrega</legend>
+            <div className="orders-weekday-picker">
+              {WEEKDAY_OPTIONS.map((day) => {
+                const isSelected = settings.delivery_weekdays.includes(day.value)
+
+                return (
+                  <label
+                    key={day.value}
+                    className={`orders-weekday-option${isSelected ? ' selected' : ''}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => toggleWeekday(day.value)}
+                    />
+                    <span className="orders-weekday-check" aria-hidden="true" />
+                    <span>{day.label}</span>
+                  </label>
+                )
+              })}
+            </div>
+          </fieldset>
+
+          <div className="orders-lead-time-panel">
+            <label>
+              Anticipación mínima
+              <div className="orders-lead-time-input">
+                <input
+                  type="number"
+                  min="0"
+                  max="30"
+                  value={settings.lead_time_days}
+                  onChange={(event) =>
+                    setSettings((current) => ({
+                      ...current,
+                      lead_time_days: Number(event.target.value),
+                    }))
+                  }
+                />
+                <span>días</span>
+              </div>
+            </label>
+            <p className="muted">Pedidos recibidos fuera de este margen pasan a la siguiente fecha disponible.</p>
+          </div>
+        </div>
+
+        <div className="orders-settings-actions">
           <button type="button" className="btn btn-primary" onClick={saveSettings} disabled={savingSettings}>
-            {savingSettings ? 'Guardando…' : 'Guardar configuración'}
+            {savingSettings ? 'Guardando...' : 'Guardar configuración'}
           </button>
         </div>
       </div>

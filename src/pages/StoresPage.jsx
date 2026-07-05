@@ -97,21 +97,6 @@ export default function StoresPage() {
     }
   }
 
-  async function handleDeactivate(store) {
-    const confirmed = window.confirm(`¿Desactivar "${store.name}"?`)
-    if (!confirmed) return
-
-    setError('')
-
-    try {
-      await storesService.deactivateStore(store.id)
-      setActionMessage(`"${store.name}" fue desactivada.`)
-      await loadStores()
-    } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'No se pudo desactivar la tienda.')
-    }
-  }
-
   return (
     <div className="products-page">
       <div className="page-header">
@@ -188,15 +173,6 @@ export default function StoresPage() {
                       >
                         Editar
                       </button>
-                      {store.active && (
-                        <button
-                          type="button"
-                          className="btn btn-small btn-danger"
-                          onClick={() => handleDeactivate(store)}
-                        >
-                          Desactivar
-                        </button>
-                      )}
                     </td>
                   </tr>
                 ))}
