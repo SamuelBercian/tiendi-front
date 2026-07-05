@@ -89,9 +89,6 @@ export default function LoginPage() {
             Registrar tienda (público)
           </Link>
 
-          <a className="chatbot-link" href="/chatbot">
-            Probar chatbot de pedidos (sin login)
-          </a>
         </form>
       </div>
     </div>
