@@ -35,7 +35,11 @@ export async function apiRequest(path, options = {}) {
     headers.Authorization = `Bearer ${token}`
   }
 
-  const response = await fetch(`/api${path}`, {
+  // 1. Leemos la variable de entorno de Vite. Si no existe, cae en '/api' por defecto (para local)
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '/api'
+
+  // 2. Reemplazamos `/api${path}` por `${apiBaseUrl}${path}`
+  const response = await fetch(`${apiBaseUrl}${path}`, {
     ...options,
     headers,
   })
