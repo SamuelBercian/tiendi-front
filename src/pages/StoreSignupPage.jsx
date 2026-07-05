@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ApiError } from '../services/api'
 import * as storesService from '../services/stores'
+import tiendiLogo from '../assets/tiendi-logo.png'
 
 export default function StoreSignupPage() {
   const [form, setForm] = useState({
@@ -43,7 +44,9 @@ export default function StoreSignupPage() {
     <div className="auth-page">
       <div className="auth-card card">
         <div className="auth-brand">
-          <span className="brand-mark">T</span>
+          <span className="brand-mark">
+            <img src={tiendiLogo} alt="Tiendi" />
+          </span>
           <div>
             <h1>Registrar tienda</h1>
             <p className="muted">Registro público de tiendas para pedidos por WhatsApp.</p>
@@ -82,4 +85,3 @@ export default function StoreSignupPage() {
     </div>
   )
 }
-

@@ -3,6 +3,7 @@ import { Link, Navigate } from 'react-router-dom'
 import { ApiError } from '../services/api'
 import * as authService from '../services/auth'
 import { useAuth } from '../hooks/useAuth'
+import tiendiLogo from '../assets/tiendi-logo.png'
 
 export default function SignupPage() {
   const { loading, isAuthenticated, reloadSession } = useAuth()
@@ -50,7 +51,9 @@ export default function SignupPage() {
     <div className="auth-page">
       <div className="auth-card card">
         <div className="auth-brand">
-          <span className="brand-mark">T</span>
+          <span className="brand-mark">
+            <img src={tiendiLogo} alt="Tiendi" />
+          </span>
           <div>
             <h1>Crear proveedor</h1>
             <p className="muted">Registra tu cuenta y tu empresa proveedora.</p>
@@ -122,4 +125,3 @@ export default function SignupPage() {
     </div>
   )
 }
-

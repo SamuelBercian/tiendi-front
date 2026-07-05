@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
+import tiendiLogo from '../assets/tiendi-logo.png'
 
 export default function Layout() {
   const { supplier, user, logout } = useAuth()
@@ -12,7 +13,9 @@ export default function Layout() {
     <div className="app-shell">
       <header className="app-header">
         <div className="brand">
-          <span className="brand-mark">T</span>
+          <span className="brand-mark">
+            <img src={tiendiLogo} alt="Tiendi" />
+          </span>
           <div>
             <strong>Tiendi</strong>
             <span className="brand-sub">Portal proveedor</span>

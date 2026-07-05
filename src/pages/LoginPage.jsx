@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, Navigate, useLocation } from 'react-router-dom'
 import { ApiError } from '../services/api'
 import { useAuth } from '../hooks/useAuth'
+import tiendiLogo from '../assets/tiendi-logo.png'
 
 export default function LoginPage() {
   const { login, isAuthenticated, loading } = useAuth()
@@ -42,7 +43,9 @@ export default function LoginPage() {
     <div className="auth-page">
       <div className="auth-card card">
         <div className="auth-brand">
-          <span className="brand-mark">T</span>
+          <span className="brand-mark">
+            <img src={tiendiLogo} alt="Tiendi" />
+          </span>
           <div>
             <h1>Tiendi</h1>
             <p className="muted">Acceso para proveedores</p>
